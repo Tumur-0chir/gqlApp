@@ -1,0 +1,8 @@
+query Banks {
+  banks(first: 100) {
+    nodes {
+      id
+      name
+    }
+  }
+}

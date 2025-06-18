@@ -1,0 +1,11 @@
+mutation BankAccountCreate($input: bankAccountCreateInput!) {
+  bankAccountCreate(input: $input) {
+    id
+    name
+    number
+    bank {
+      id
+      name
+    }
+  }
+}

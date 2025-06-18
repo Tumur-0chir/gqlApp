@@ -1,0 +1,19 @@
+query Me {
+    me {
+        id
+        bankAccounts  {
+            name
+            id
+            bank {
+                id
+                swiftCode
+                name
+                icon {
+                    url
+                }
+            }
+            bankId
+            number
+        }
+    }
+}
