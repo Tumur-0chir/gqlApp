@@ -46,7 +46,7 @@ const BankAccount = () => {
         ]);
       };
 
-  if (error) return <Text>Error: {error.message}</Text>;
+  if (error) return <Text style={{marginTop: 60}}>Error: {error.message}</Text>;
   return (
     <View
       style={{

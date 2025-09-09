@@ -1,0 +1,10 @@
+schema: ./schema.graphql
+documents:
+  - ./**/*.{graphql,gql}
+
+extensions:
+  endpoints:
+    storepay:
+      url: https://api.storepay.global/graphql
+      headers:
+        Authorization: bearer ${INTROSPECTION_TOKEN}

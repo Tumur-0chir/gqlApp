@@ -124,9 +124,12 @@ export type Agreement = BaseModelInterface & Node & {
   __typename?: 'Agreement';
   audienceKind: AgreementAudienceKind;
   category: AgreementCategory;
+  content?: Maybe<Scalars['String']['output']>;
   createdAt: Scalars['ISO8601DateTime']['output'];
+  description?: Maybe<Scalars['String']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
+  isActive: Scalars['Boolean']['output'];
   isForce: Scalars['Boolean']['output'];
   preferences: Scalars['JSON']['output'];
   title?: Maybe<Scalars['String']['output']>;
@@ -185,6 +188,7 @@ export type AgreementFilter = {
   category?: InputMaybe<EnumStringFilter>;
   createdAt?: InputMaybe<DateFilter>;
   id?: InputMaybe<IdFilter>;
+  isActive?: InputMaybe<BoolFilter>;
   title?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateFilter>;
 };
@@ -785,6 +789,21 @@ export type BlobFilter = {
   id?: InputMaybe<IdFilter>;
   updatedAt?: InputMaybe<DateFilter>;
 };
+
+export enum Blood {
+  /** A */
+  A = 'a',
+  /** AB */
+  Ab = 'ab',
+  /** B */
+  B = 'b',
+  /** NEGATIVE */
+  Negative = 'negative',
+  /** O */
+  O = 'o',
+  /** TIDAK DIKETAHUI */
+  TidakDiketahui = 'tidak_diketahui'
+}
 
 export type BoolFilter = {
   /** equals to */
@@ -1628,6 +1647,29 @@ export enum DebtorCode {
   StandardCharteredBank = 'standard_chartered_bank'
 }
 
+export enum Department {
+  /** business_development */
+  BusinessDevelopment = 'business_development',
+  /** customer_service */
+  CustomerService = 'customer_service',
+  /** finance_asset_management */
+  FinanceAssetManagement = 'finance_asset_management',
+  /** information_technology */
+  InformationTechnology = 'information_technology',
+  /** international_relationship */
+  InternationalRelationship = 'international_relationship',
+  /** legal_claims */
+  LegalClaims = 'legal_claims',
+  /** operations_human_resources */
+  OperationsHumanResources = 'operations_human_resources',
+  /** other */
+  Other = 'other',
+  /** risk_compliance */
+  RiskCompliance = 'risk_compliance',
+  /** sales_collaboration */
+  SalesCollaboration = 'sales_collaboration'
+}
+
 export enum DeviceChannel {
   /** email */
   Email = 'email',
@@ -1644,6 +1686,7 @@ export type DeviceFilter = {
   createdAt?: InputMaybe<DateFilter>;
   deviceId?: InputMaybe<StringFilter>;
   id?: InputMaybe<IdFilter>;
+  ip?: InputMaybe<StringFilter>;
   name?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateFilter>;
   user?: InputMaybe<UserFilter>;
@@ -2282,8 +2325,6 @@ export enum EconomicSector {
   MiningAndQuarryingCoalMiningPeatExtractionCoalGasificationAndCoalBriquetteManufacturingCoalMiningPeatExtractionAndCoalGasification = 'mining_and_quarrying_coal_mining_peat_extraction_coal_gasification_and_coal_briquette_manufacturing_coal_mining_peat_extraction_and_coal_gasification',
   /** MINING AND QUARRYING CRUDE PETROLEUM AND NATURAL GAS MINING AND MINING SERVICES Crude Petroleum and Natural Gas Mining and Geothermal Energy Exploitation Crude Petroleum and Natural Gas Mining and Geothermal Energy Exploitation */
   MiningAndQuarryingCrudePetroleumAndNaturalGasMiningAndMiningServicesCrudePetroleumAndNaturalGasMiningAndGeothermalEnergyExploitationCrudePetroleumAndNaturalGasMiningAndGeothermalEnergyExploitation = 'mining_and_quarrying_crude_petroleum_and_natural_gas_mining_and_mining_services_crude_petroleum_and_natural_gas_mining_and_geothermal_energy_exploitation_crude_petroleum_and_natural_gas_mining_and_geothermal_energy_exploitation',
-  /** MINING AND QUARRYING CRUDE PETROLEUM AND NATURAL GAS MINING AND MINING SERVICES Crude Petroleum and Natural Gas Mining and Geothermal Energy Exploitation Crude Petroleum and Natural Gas Mining and Geothermal Energy Exploitation  */
-  MiningAndQuarryingCrudePetroleumAndNaturalGasMiningAndMiningServicesCrudePetroleumAndNaturalGasMiningAndGeothermalEnergyExploitationCrudePetroleumAndNaturalGasMiningAndGeothermalEnergyExploitation = 'mining_and_quarrying_crude_petroleum_and_natural_gas_mining_and_mining_services_crude_petroleum_and_natural_gas_mining_and_geothermal_energy_exploitation_crude_petroleum_and_natural_gas_mining_and_geothermal_energy_exploitation_',
   /** MINING AND QUARRYING CRUDE PETROLEUM AND NATURAL GAS MINING AND MINING SERVICES Crude Petroleum and Natural Gas Mining and Geothermal Energy Exploitation Crude Petroleum and Natural Gas Mining and Geothermal Energy Exploitation Crude Petroleum and Natural Gas Mining */
   MiningAndQuarryingCrudePetroleumAndNaturalGasMiningAndMiningServicesCrudePetroleumAndNaturalGasMiningAndGeothermalEnergyExploitationCrudePetroleumAndNaturalGasMiningAndGeothermalEnergyExploitationCrudePetroleumAndNaturalGasMining = 'mining_and_quarrying_crude_petroleum_and_natural_gas_mining_and_mining_services_crude_petroleum_and_natural_gas_mining_and_geothermal_energy_exploitation_crude_petroleum_and_natural_gas_mining_and_geothermal_energy_exploitation_crude_petroleum_and_natural_gas_mining',
   /** MINING AND QUARRYING METAL ORE MINING Iron Sand and Iron Ore Mining */
@@ -2713,6 +2754,18 @@ export enum Education {
   UpperSecondaryEducation = 'upper_secondary_education'
 }
 
+export enum EmergencyRelation {
+  BrotherSister = 'brother_sister',
+  Child = 'child',
+  DomesticPartner = 'domestic_partner',
+  FatherMother = 'father_mother',
+  Friend = 'friend',
+  GrandfatherGrandmother = 'grandfather_grandmother',
+  Other = 'other',
+  Relative = 'relative',
+  Spouse = 'spouse'
+}
+
 export type Employee = BaseModelInterface & InvitationInterface & Node & {
   __typename?: 'Employee';
   acceptedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
@@ -2777,6 +2830,15 @@ export type EnumStringFilter = {
   /** is null ? */
   null?: InputMaybe<Scalars['Boolean']['input']>;
 };
+
+export enum FamilyIncome {
+  Above_5Million = 'above_5_million',
+  UpTo_1Million = 'up_to_1_million',
+  UpTo_2Million = 'up_to_2_million',
+  UpTo_3Million = 'up_to_3_million',
+  UpTo_4Million = 'up_to_4_million',
+  UpTo_5Million = 'up_to_5_million'
+}
 
 export type Faq = BaseModelInterface & Node & {
   __typename?: 'Faq';
@@ -3442,6 +3504,53 @@ export type ImageUrlArgs = {
   resizeToLimit?: InputMaybe<Array<Scalars['Int']['input']>>;
 };
 
+export enum IncomeEarners {
+  FourPlus = 'four_plus',
+  Single = 'single',
+  Three = 'three',
+  Two = 'two',
+  Zero = 'zero'
+}
+
+export enum Industry {
+  /** agriculture_mining_company */
+  AgricultureMiningCompany = 'agriculture_mining_company',
+  /** auto_repair_service */
+  AutoRepairService = 'auto_repair_service',
+  /** banking_insurance_nbfs */
+  BankingInsuranceNbfs = 'banking_insurance_nbfs',
+  /** delivery_transportation_services */
+  DeliveryTransportationServices = 'delivery_transportation_services',
+  /** educational_institution */
+  EducationalInstitution = 'educational_institution',
+  /** entertainment_cultural_services */
+  EntertainmentCulturalServices = 'entertainment_cultural_services',
+  /** fitness_beauty_services */
+  FitnessBeautyServices = 'fitness_beauty_services',
+  /** government_state_institutions */
+  GovernmentStateInstitutions = 'government_state_institutions',
+  /** healthcare_spa_sanatoriums */
+  HealthcareSpaSanatoriums = 'healthcare_spa_sanatoriums',
+  /** imported_goods_trading_organization */
+  ImportedGoodsTradingOrganization = 'imported_goods_trading_organization',
+  /** it_software_company */
+  ItSoftwareCompany = 'it_software_company',
+  /** legal_services_notary */
+  LegalServicesNotary = 'legal_services_notary',
+  /** ngo_humanitarian_organization */
+  NgoHumanitarianOrganization = 'ngo_humanitarian_organization',
+  /** other */
+  Other = 'other',
+  /** religious_organization */
+  ReligiousOrganization = 'religious_organization',
+  /** restaurant_food_production */
+  RestaurantFoodProduction = 'restaurant_food_production',
+  /** trade_company */
+  TradeCompany = 'trade_company',
+  /** travel_agency_hotels */
+  TravelAgencyHotels = 'travel_agency_hotels'
+}
+
 export type IntFilter = {
   /** is blank ? */
   blank?: InputMaybe<Scalars['Boolean']['input']>;
@@ -3859,7 +3968,7 @@ export enum JobTitleId {
 
 export type Kyc = BaseModelInterface & Node & {
   __typename?: 'Kyc';
-  bloodType?: Maybe<Scalars['String']['output']>;
+  bloodType?: Maybe<Blood>;
   companyAddress?: Maybe<Scalars['String']['output']>;
   companyName?: Maybe<Scalars['String']['output']>;
   compareDetail?: Maybe<Scalars['JSON']['output']>;
@@ -3867,6 +3976,7 @@ export type Kyc = BaseModelInterface & Node & {
   contactRelationTwo?: Maybe<ContactRelationTwo>;
   createdAt: Scalars['ISO8601DateTime']['output'];
   department?: Maybe<Scalars['String']['output']>;
+  departmentEnums?: Maybe<Department>;
   education?: Maybe<Education>;
   emergencyContactName?: Maybe<Scalars['String']['output']>;
   emergencyContactNameTwo?: Maybe<Scalars['String']['output']>;
@@ -3874,15 +3984,20 @@ export type Kyc = BaseModelInterface & Node & {
   emergencyContactPhoneTwo?: Maybe<Scalars['String']['output']>;
   emergencyContactSurname?: Maybe<Scalars['String']['output']>;
   emergencyContactSurnameTwo?: Maybe<Scalars['String']['output']>;
+  emergencyContacts?: Maybe<Scalars['JSON']['output']>;
   faceRekognition?: Maybe<Scalars['JSON']['output']>;
+  familyIncome?: Maybe<Scalars['String']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
+  incomeEarners?: Maybe<Scalars['String']['output']>;
   industry?: Maybe<Scalars['String']['output']>;
+  industryEnums?: Maybe<Industry>;
   ktp?: Maybe<Image>;
   kycReferenceNo?: Maybe<Scalars['String']['output']>;
   kycVerifyStatus: Scalars['String']['output'];
   maritalStatus?: Maybe<MaritalStatus>;
   nationality?: Maybe<Scalars['String']['output']>;
+  newMaritalStatus?: Maybe<Scalars['String']['output']>;
   number: Scalars['String']['output'];
   numberOfChildren?: Maybe<NumberOfChildren>;
   partnerReferenceNo?: Maybe<Scalars['String']['output']>;
@@ -3890,19 +4005,50 @@ export type Kyc = BaseModelInterface & Node & {
   passportBack?: Maybe<Image>;
   passportFront?: Maybe<Image>;
   passportImage?: Maybe<Image>;
+  pep?: Maybe<Pep>;
+  pepEnum?: Maybe<Pep>;
+  pepOrg?: Maybe<Scalars['String']['output']>;
+  pepOrgList?: Maybe<Scalars['JSON']['output']>;
+  pepPosition?: Maybe<Scalars['String']['output']>;
+  pepRelation?: Maybe<Scalars['String']['output']>;
+  pepRelationEnum?: Maybe<PepRelation>;
+  pepStatus?: Maybe<Scalars['String']['output']>;
   placeOfBirth?: Maybe<Scalars['String']['output']>;
   position?: Maybe<Scalars['String']['output']>;
+  positionEnums?: Maybe<Position>;
   preferences: Scalars['JSON']['output'];
+  preferredCompanyCity?: Maybe<Scalars['String']['output']>;
+  preferredCompanyPhone?: Maybe<Scalars['String']['output']>;
+  preferredCompanyZipCode?: Maybe<Scalars['String']['output']>;
+  preferredCorporateType?: Maybe<Scalars['String']['output']>;
+  preferredCustomerId?: Maybe<Scalars['String']['output']>;
   preferredDebtorCode?: Maybe<DebtorCode>;
-  preferredEconomicSector?: Maybe<EconomicSector>;
+  preferredEconomyCode?: Maybe<EconomicSector>;
+  preferredEmergencyContactAddress?: Maybe<Scalars['String']['output']>;
+  preferredEmergencyContactCity?: Maybe<Scalars['String']['output']>;
+  preferredEmergencyContactDistrict?: Maybe<Scalars['String']['output']>;
+  preferredEmergencyContactProvence?: Maybe<Scalars['String']['output']>;
+  preferredEmergencyContactRtRw?: Maybe<Scalars['String']['output']>;
+  preferredEmergencyContactType?: Maybe<Spouse>;
+  preferredEmergencyContactVillage?: Maybe<Scalars['String']['output']>;
+  preferredEmergencyContactZipCode?: Maybe<Scalars['String']['output']>;
+  preferredFullName?: Maybe<Scalars['String']['output']>;
   preferredHomePostalCode?: Maybe<PostalCode>;
+  preferredIdExpirationDate?: Maybe<Scalars['ISO8601DateTime']['output']>;
   preferredJobId?: Maybe<JobId>;
   preferredJobTitleId?: Maybe<JobTitleId>;
   preferredLastEducation?: Maybe<LastEducation>;
+  preferredLivedSince?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  preferredMaritalStatus?: Maybe<MaritalStatusIndonesia>;
+  preferredMonthlyExpense?: Maybe<Scalars['Float']['output']>;
+  preferredPhoneAreaCode?: Maybe<Scalars['String']['output']>;
   preferredPlaceOfBirthPostalCode?: Maybe<PostalCode>;
+  preferredSpouse?: Maybe<Spouse>;
+  preferredTargetMarket?: Maybe<Scalars['String']['output']>;
+  preferredZipCode?: Maybe<PostalCode>;
   reason: Scalars['String']['output'];
   regionId: Scalars['ID']['output'];
-  religion?: Maybe<Scalars['String']['output']>;
+  religion?: Maybe<Religion>;
   result?: Maybe<Scalars['JSON']['output']>;
   rtRw?: Maybe<Scalars['String']['output']>;
   salaryIncome?: Maybe<Scalars['Float']['output']>;
@@ -3974,6 +4120,104 @@ export enum LastEducation {
   Others = 'others'
 }
 
+export type LoanBss = BaseModelInterface & LoanInterface & Node & {
+  __typename?: 'LoanBss';
+  amount: Scalars['Float']['output'];
+  /** Returns list of Audit logs. */
+  audits?: Maybe<Scalars['JSON']['output']>;
+  balance: Scalars['Float']['output'];
+  bankTransactions?: Maybe<Array<BankTransaction>>;
+  canceledAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  category: Category;
+  categoryId?: Maybe<Scalars['ID']['output']>;
+  categoryName?: Maybe<Scalars['String']['output']>;
+  closedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  confirmedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  createdAt: Scalars['ISO8601DateTime']['output'];
+  currency: Scalars['String']['output'];
+  description?: Maybe<Scalars['String']['output']>;
+  difAmount: Scalars['Float']['output'];
+  endDate: Scalars['ISO8601DateTime']['output'];
+  expiredAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  externalId?: Maybe<Scalars['ID']['output']>;
+  fareAmount: Scalars['Float']['output'];
+  firstPaymentDate?: Maybe<Scalars['ISO8601Date']['output']>;
+  /** ID of the object. */
+  id: Scalars['ID']['output'];
+  initialAmount: Scalars['Float']['output'];
+  intAmount: Scalars['Float']['output'];
+  interestRate: Scalars['Float']['output'];
+  interests: InterestConnection;
+  invoices: Array<Invoice>;
+  loanModifications: Array<LoanModification>;
+  loanOverdueTerms?: Maybe<Scalars['String']['output']>;
+  merchant: Merchant;
+  merchantId: Scalars['ID']['output'];
+  merchantUser: MerchantUser;
+  merchantUserId?: Maybe<Scalars['ID']['output']>;
+  modifiedAmount: Scalars['Float']['output'];
+  number: Scalars['String']['output'];
+  otpStatus?: Maybe<Scalars['String']['output']>;
+  overdueDays?: Maybe<Scalars['Int']['output']>;
+  paidAmount: Scalars['Float']['output'];
+  paidAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  payMaxAmount?: Maybe<Scalars['Float']['output']>;
+  payMinAmount?: Maybe<Scalars['Float']['output']>;
+  payments?: Maybe<Array<Payment>>;
+  paymentsPerMonth: Scalars['Int']['output'];
+  penAmount: Scalars['Float']['output'];
+  penalties: Array<Penalty>;
+  penaltyRate: Scalars['Float']['output'];
+  preferences?: Maybe<Scalars['JSON']['output']>;
+  principalBalance: Scalars['Float']['output'];
+  product: Product;
+  productId: Scalars['ID']['output'];
+  quality: LoanQuality;
+  refundedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  region: Region;
+  regionId?: Maybe<Scalars['ID']['output']>;
+  registerNum: Scalars['String']['output'];
+  rejectedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  riskScore?: Maybe<Scalars['Float']['output']>;
+  salesTransactions: Array<Transaction>;
+  serviceName: Scalars['String']['output'];
+  settled: Scalars['Boolean']['output'];
+  settlementId?: Maybe<Scalars['ID']['output']>;
+  startDate: Scalars['ISO8601DateTime']['output'];
+  status: LoanStatus;
+  store: Store;
+  storeContractNumber?: Maybe<Scalars['String']['output']>;
+  storeFeePercent: Scalars['Float']['output'];
+  storeId: Scalars['ID']['output'];
+  taxAmount: Scalars['Float']['output'];
+  totalAmount?: Maybe<Scalars['Float']['output']>;
+  totalPaidAmount?: Maybe<Scalars['Float']['output']>;
+  totalPaidPenalty?: Maybe<Scalars['Float']['output']>;
+  totalPenalty?: Maybe<Scalars['Float']['output']>;
+  totalPendingInvoiceAmount?: Maybe<Scalars['Float']['output']>;
+  totalUnpaidAmount?: Maybe<Scalars['Float']['output']>;
+  totalUnpaidBalance: Scalars['Float']['output'];
+  totalUnpaidPenalty?: Maybe<Scalars['Float']['output']>;
+  type: Scalars['String']['output'];
+  updatedAt: Scalars['ISO8601DateTime']['output'];
+  user?: Maybe<User>;
+  userId: Scalars['ID']['output'];
+  v3Payments?: Maybe<Scalars['JSON']['output']>;
+  verifications: Array<Verification>;
+  zmsQuality: LoanZmsQuality;
+};
+
+
+export type LoanBssInterestsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<InterestFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<SortFilter>;
+};
+
 export type LoanCar = BaseModelInterface & LoanInterface & Node & {
   __typename?: 'LoanCar';
   amount: Scalars['Float']['output'];
@@ -4031,6 +4275,7 @@ export type LoanCar = BaseModelInterface & LoanInterface & Node & {
   regionId?: Maybe<Scalars['ID']['output']>;
   registerNum: Scalars['String']['output'];
   rejectedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  riskScore?: Maybe<Scalars['Float']['output']>;
   salesTransactions: Array<Transaction>;
   serviceName: Scalars['String']['output'];
   settled: Scalars['Boolean']['output'];
@@ -4056,6 +4301,7 @@ export type LoanCar = BaseModelInterface & LoanInterface & Node & {
   userId: Scalars['ID']['output'];
   v3Payments?: Maybe<Scalars['JSON']['output']>;
   verifications: Array<Verification>;
+  zmsQuality: LoanZmsQuality;
 };
 
 
@@ -4096,6 +4342,7 @@ export type LoanFilter = {
   refundedAt?: InputMaybe<DateFilter>;
   registerNum?: InputMaybe<StringFilter>;
   rejectedAt?: InputMaybe<DateFilter>;
+  riskScore?: InputMaybe<IntFilter>;
   settled?: InputMaybe<BoolFilter>;
   settlementId?: InputMaybe<IdFilter>;
   startDate?: InputMaybe<DateFilter>;
@@ -4169,6 +4416,7 @@ export type LoanInterface = {
   regionId?: Maybe<Scalars['ID']['output']>;
   registerNum: Scalars['String']['output'];
   rejectedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  riskScore?: Maybe<Scalars['Float']['output']>;
   salesTransactions: Array<Transaction>;
   serviceName: Scalars['String']['output'];
   settled: Scalars['Boolean']['output'];
@@ -4194,6 +4442,7 @@ export type LoanInterface = {
   userId: Scalars['ID']['output'];
   v3Payments?: Maybe<Scalars['JSON']['output']>;
   verifications: Array<Verification>;
+  zmsQuality: LoanZmsQuality;
 };
 
 
@@ -4295,6 +4544,7 @@ export type LoanLong = BaseModelInterface & LoanInterface & Node & {
   regionId?: Maybe<Scalars['ID']['output']>;
   registerNum: Scalars['String']['output'];
   rejectedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  riskScore?: Maybe<Scalars['Float']['output']>;
   salesTransactions: Array<Transaction>;
   serviceName: Scalars['String']['output'];
   settled: Scalars['Boolean']['output'];
@@ -4330,6 +4580,7 @@ export type LoanLong = BaseModelInterface & LoanInterface & Node & {
   xacPenaltyAmount?: Maybe<Scalars['Float']['output']>;
   xacSchedule?: Maybe<Scalars['JSON']['output']>;
   xacStatus?: Maybe<Scalars['String']['output']>;
+  zmsQuality: LoanZmsQuality;
 };
 
 
@@ -4603,6 +4854,7 @@ export type LoanRegular = BaseModelInterface & LoanInterface & Node & {
   regionId?: Maybe<Scalars['ID']['output']>;
   registerNum: Scalars['String']['output'];
   rejectedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  riskScore?: Maybe<Scalars['Float']['output']>;
   salesTransactions: Array<Transaction>;
   serviceName: Scalars['String']['output'];
   settled: Scalars['Boolean']['output'];
@@ -4628,6 +4880,7 @@ export type LoanRegular = BaseModelInterface & LoanInterface & Node & {
   userId: Scalars['ID']['output'];
   v3Payments?: Maybe<Scalars['JSON']['output']>;
   verifications: Array<Verification>;
+  zmsQuality: LoanZmsQuality;
 };
 
 
@@ -4650,6 +4903,19 @@ export enum LoanStatus {
   Refunded = 'refunded',
   Rejected = 'rejected',
   SystemRejected = 'system_rejected'
+}
+
+export enum LoanZmsQuality {
+  /** bad */
+  Bad = 'bad',
+  /** doubtful */
+  Doubtful = 'doubtful',
+  /** special_mention */
+  SpecialMention = 'special_mention',
+  /** standard */
+  Standard = 'standard',
+  /** substandard */
+  Substandard = 'substandard'
 }
 
 export type LoyaltyCategoryFilter = {
@@ -4679,6 +4945,19 @@ export enum MaritalStatus {
   Widowed = 'widowed'
 }
 
+export enum MaritalStatusIndonesia {
+  /** Divorced */
+  Divorced = 'divorced',
+  /** Married */
+  Married = 'married',
+  /** Separated */
+  Separated = 'separated',
+  /** Single */
+  Single = 'single',
+  /** Widowed */
+  Widowed = 'widowed'
+}
+
 /** StorePay Merchant. */
 export type Merchant = BaseModelInterface & Node & {
   __typename?: 'Merchant';
@@ -4696,6 +4975,7 @@ export type Merchant = BaseModelInterface & Node & {
   /** ID of the object. */
   id: Scalars['ID']['output'];
   image?: Maybe<Image>;
+  isGoFresh?: Maybe<Scalars['Boolean']['output']>;
   isShow?: Maybe<Scalars['Boolean']['output']>;
   logo?: Maybe<Image>;
   name: Scalars['String']['output'];
@@ -4774,6 +5054,7 @@ export type MerchantFilter = {
   email?: InputMaybe<StringFilter>;
   feePercent?: InputMaybe<IntFilter>;
   id?: InputMaybe<IdFilter>;
+  isGoFresh?: InputMaybe<BoolFilter>;
   isShow?: InputMaybe<BoolFilter>;
   name?: InputMaybe<StringFilter>;
   phone?: InputMaybe<StringFilter>;
@@ -4984,9 +5265,9 @@ export type Mutation = {
   kycUserIdConfirmationForBss?: Maybe<Kyc>;
   /**
    * This API is provided to input Customer Information. Partner can send customer
-   *           information to create / onboard customer. During this step, BSS will also perform some
-   *           validations to check the credit score and risk assessment with the data provided from
-   *           Partner
+   * information to create / onboard customer. During this step, BSS will also perform some
+   * validations to check the credit score and risk assessment with the data provided from
+   * Partner
    */
   kycUserInformationFormForBss?: Maybe<Kyc>;
   loanActivateWithoutAdvance?: Maybe<LoanInterface>;
@@ -5019,18 +5300,24 @@ export type Mutation = {
   passwordReset?: Maybe<Scalars['ID']['output']>;
   paymentPaymentCapture?: Maybe<Payment>;
   paymentPaymentCreate?: Maybe<Payment>;
+  /** Register cloud messaging token */
+  registerFcmToken?: Maybe<Scalars['ID']['output']>;
   /** Register onesignal subscription id */
   registerSubId?: Maybe<Scalars['ID']['output']>;
+  /** resend loan otp for bss */
+  resendTransactionOtpForBss?: Maybe<Scalars['Boolean']['output']>;
   /** Send OTP by email for Indonesia */
   sendOtpByEmailForIndonesia: Scalars['ID']['output'];
   /** Send OTP by phone for Indonesia */
-  sendOtpByPhoneForIndonesia: Scalars['ID']['output'];
+  sendOtpByPhoneForIndonesia?: Maybe<Scalars['String']['output']>;
   /** user signs contract by privy */
   signUserContract?: Maybe<UserContract>;
   spcTransfer?: Maybe<Transaction>;
   spcWithdraw?: Maybe<Transaction>;
   /** Update verified */
   userChangeState?: Maybe<User>;
+  /** Check OTP for user that makes risky action */
+  userCheckOtpForRiskyAction?: Maybe<Kyc>;
   /** Invite user from merchant and user signup. */
   userCreate?: Maybe<Scalars['ID']['output']>;
   /** Delete user info */
@@ -5039,6 +5326,8 @@ export type Mutation = {
   userDeviceSendOtp?: Maybe<Scalars['ID']['output']>;
   /** Disable user */
   userDisable?: Maybe<User>;
+  /** Compare user face with passport image for risky actions */
+  userFaceCompareForRiskyAction?: Maybe<User>;
   userFindByPhone?: Maybe<User>;
   /** Generate reference for user */
   userGenerateReference?: Maybe<User>;
@@ -5049,15 +5338,22 @@ export type Mutation = {
   userPinCreate?: Maybe<User>;
   userPinForget?: Maybe<Scalars['ID']['output']>;
   userReCreateStatements?: Maybe<CreditScore>;
+  /** Check user passport for risky actions */
+  userReadyForRekognition?: Maybe<Scalars['Boolean']['output']>;
   userRequestCreditScore?: Maybe<CreditScore>;
+  /** Detect users with risky actions */
+  userRiskyAction?: Maybe<User>;
   /** Update user info */
   userUpdate?: Maybe<User>;
   /** Validate OTP email for Indonesia */
   validateOtpEmailForIndonesia?: Maybe<Scalars['ID']['output']>;
   /** Validate phone OTP  for Indonesia */
   validateOtpForIndonesia?: Maybe<Scalars['ID']['output']>;
+  /** validate loan otp for bss */
+  validateTransactionOtpForBss?: Maybe<Scalars['Boolean']['output']>;
   /** respond for Verification */
   verificationRespond?: Maybe<Verification>;
+  virtualAccountDestroy?: Maybe<VirtualAccount>;
   walletCryptoTransactionCreate?: Maybe<Transaction>;
   xacCalculate?: Maybe<Scalars['JSON']['output']>;
   xacChangeCreditAccount?: Maybe<LoanLong>;
@@ -5325,8 +5621,18 @@ export type MutationPaymentPaymentCreateArgs = {
 };
 
 
+export type MutationRegisterFcmTokenArgs = {
+  input: RegisterFcmTokenInput;
+};
+
+
 export type MutationRegisterSubIdArgs = {
   input: RegisterSubIdInput;
+};
+
+
+export type MutationResendTransactionOtpForBssArgs = {
+  input: ResendTransactionOtpForBssInput;
 };
 
 
@@ -5360,6 +5666,11 @@ export type MutationUserChangeStateArgs = {
 };
 
 
+export type MutationUserCheckOtpForRiskyActionArgs = {
+  input: UserCheckOtpForRiskyActionInput;
+};
+
+
 export type MutationUserCreateArgs = {
   input: UserCreateInput;
 };
@@ -5382,6 +5693,11 @@ export type MutationUserDeviceSendOtpArgs = {
 
 export type MutationUserDisableArgs = {
   input: UserDisableInput;
+};
+
+
+export type MutationUserFaceCompareForRiskyActionArgs = {
+  input: UserFaceCompareForRiskyActionInput;
 };
 
 
@@ -5425,8 +5741,18 @@ export type MutationUserReCreateStatementsArgs = {
 };
 
 
+export type MutationUserReadyForRekognitionArgs = {
+  input: UserReadyForRekognitionInput;
+};
+
+
 export type MutationUserRequestCreditScoreArgs = {
   input: UserRequestCreditScoreInput;
+};
+
+
+export type MutationUserRiskyActionArgs = {
+  input: UserRiskyActionInput;
 };
 
 
@@ -5445,8 +5771,18 @@ export type MutationValidateOtpForIndonesiaArgs = {
 };
 
 
+export type MutationValidateTransactionOtpForBssArgs = {
+  input: ValidateTransactionOtpForBssInput;
+};
+
+
 export type MutationVerificationRespondArgs = {
   input: VerificationRespondInput;
+};
+
+
+export type MutationVirtualAccountDestroyArgs = {
+  input: VirtualAccountDestroyInput;
 };
 
 
@@ -5493,6 +5829,15 @@ export type MutationXacKycCheckArgs = {
 export type MutationXacLoanInvoiceCreateArgs = {
   input: XacLoanInvoiceCreateInput;
 };
+
+export enum NewMaritalStatus {
+  Divorced = 'divorced',
+  DomesticPartner = 'domestic_partner',
+  Married = 'married',
+  Other = 'other',
+  Single = 'single',
+  Widowed = 'widowed'
+}
 
 /** An object with an ID. */
 export type Node = {
@@ -5770,12 +6115,73 @@ export enum PenaltyStatus {
   Pending = 'pending'
 }
 
+export enum Pep {
+  /** non_politically_exposed_person */
+  NonPoliticallyExposedPerson = 'non_politically_exposed_person',
+  /** politically_exposed_person */
+  PoliticallyExposedPerson = 'politically_exposed_person',
+  /** related_politically_exposed_person */
+  RelatedPoliticallyExposedPerson = 'related_politically_exposed_person'
+}
+
+export enum PepRelation {
+  /** child */
+  Child = 'child',
+  /** father_mother */
+  FatherMother = 'father_mother',
+  /** grandchild */
+  Grandchild = 'grandchild',
+  /** grandfather_grandmother */
+  GrandfatherGrandmother = 'grandfather_grandmother',
+  /** myself */
+  Myself = 'myself',
+  /** older_younger_sibling */
+  OlderYoungerSibling = 'older_younger_sibling',
+  /** wife_husband */
+  WifeHusband = 'wife_husband'
+}
+
+export enum PepRelationMongolia {
+  BrotherSister = 'brother_sister',
+  Grandchild = 'grandchild',
+  GrandmotherGrandfather = 'grandmother_grandfather',
+  MotherFather = 'mother_father',
+  Other = 'other',
+  SonDaughterInLaw = 'son_daughter_in_law',
+  WifeHusband = 'wife_husband'
+}
+
+export enum PepStatus {
+  IAm = 'i_am',
+  No = 'no',
+  Yes = 'yes'
+}
+
 export type PhoneFilter = {
   createdAt?: InputMaybe<DateFilter>;
   id?: InputMaybe<IdFilter>;
   phone?: InputMaybe<StringFilter>;
   updatedAt?: InputMaybe<DateFilter>;
 };
+
+export enum Position {
+  /** ceo */
+  Ceo = 'ceo',
+  /** division_director */
+  DivisionDirector = 'division_director',
+  /** head_of_department */
+  HeadOfDepartment = 'head_of_department',
+  /** intern_employee */
+  InternEmployee = 'intern_employee',
+  /** manager */
+  Manager = 'manager',
+  /** other */
+  Other = 'other',
+  /** senior */
+  Senior = 'senior',
+  /** specialist */
+  Specialist = 'specialist'
+}
 
 export enum PostalCode {
   /** DKI JAYA */
@@ -5885,7 +6291,7 @@ export type Product = BaseModelInterface & Node & {
   minLoanAmount?: Maybe<Scalars['Int']['output']>;
   name: Scalars['String']['output'];
   position: Scalars['Int']['output'];
-  preferences?: Maybe<Scalars['String']['output']>;
+  preferences?: Maybe<Scalars['JSON']['output']>;
   regionId: Scalars['Int']['output'];
   status: ProductStatus;
   updatedAt: Scalars['ISO8601DateTime']['output'];
@@ -6552,6 +6958,23 @@ export type RegionFilter = {
   updatedAt?: InputMaybe<DateFilter>;
 };
 
+export enum Religion {
+  /** Buddha */
+  Buddha = 'buddha',
+  /** Catholic */
+  Catholic = 'catholic',
+  /** Confucianism */
+  Confucianism = 'confucianism',
+  /** Hindu */
+  Hindu = 'hindu',
+  /** Islam */
+  Islam = 'islam',
+  /** Others */
+  Others = 'others',
+  /** Protestant */
+  Protestant = 'protestant'
+}
+
 export enum ResidentOwnerStatus {
   /** Community Property */
   CommunityProperty = 'community_property',
@@ -6565,6 +6988,17 @@ export enum ResidentOwnerStatus {
   TenancyInCommon = 'tenancy_in_common',
   /** Trust Ownership */
   TrustOwnership = 'trust_ownership'
+}
+
+export enum RiskyAction {
+  /** change_email */
+  ChangeEmail = 'change_email',
+  /** change_password */
+  ChangePassword = 'change_password',
+  /** change_phone */
+  ChangePhone = 'change_phone',
+  /** change_pin */
+  ChangePin = 'change_pin'
 }
 
 /** Settlement for merchant stores */
@@ -6673,6 +7107,23 @@ export type SpFileFilter = {
   updatedAt?: InputMaybe<DateFilter>;
 };
 
+export enum Spouse {
+  /** Child */
+  Child = 'child',
+  /** Colleague */
+  Colleague = 'colleague',
+  /** Friend */
+  Friend = 'friend',
+  /** Others */
+  Others = 'others',
+  /** Parent */
+  Parent = 'parent',
+  /** Relative */
+  Relative = 'relative',
+  /** Sibling */
+  Sibling = 'sibling'
+}
+
 export enum StartingPeriod {
   /** Five to Ten Years */
   FiveToTenYears = 'five_to_ten_years',
@@ -6777,12 +7228,13 @@ export type StoreFilter = {
   bankAccount?: InputMaybe<AccountFilter>;
   code?: InputMaybe<StringFilter>;
   contractNumber?: InputMaybe<StringFilter>;
-  contractStatus?: InputMaybe<StringFilter>;
+  contractStatus?: InputMaybe<EnumStringFilter>;
   contractType?: InputMaybe<StringFilter>;
   createdAt?: InputMaybe<DateFilter>;
   email?: InputMaybe<StringFilter>;
   feePercent?: InputMaybe<IntFilter>;
   id?: InputMaybe<IdFilter>;
+  isActive?: InputMaybe<BoolFilter>;
   isAirline?: InputMaybe<BoolFilter>;
   isLockSpc?: InputMaybe<StringFilter>;
   isOnlyPremium?: InputMaybe<StringFilter>;
@@ -6793,6 +7245,7 @@ export type StoreFilter = {
   name?: InputMaybe<StringFilter>;
   phone?: InputMaybe<StringFilter>;
   register?: InputMaybe<StringFilter>;
+  riskScore?: InputMaybe<IntFilter>;
   settlementDay?: InputMaybe<IntFilter>;
   settlementTransferType?: InputMaybe<EnumStringFilter>;
   updatedAt?: InputMaybe<DateFilter>;
@@ -6957,7 +7410,9 @@ export type Transaction = BaseModelInterface & Node & {
   amount?: Maybe<Scalars['Float']['output']>;
   archived: Scalars['Boolean']['output'];
   authorizedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  authorizedBy?: Maybe<User>;
   authorizedById?: Maybe<Scalars['ID']['output']>;
+  authorizedUsername?: Maybe<Scalars['String']['output']>;
   balance?: Maybe<Scalars['Float']['output']>;
   bankTransfer?: Maybe<BankTransfer>;
   category?: Maybe<TransactionCategory>;
@@ -7071,7 +7526,7 @@ export type TransactionFilter = {
 };
 
 /** Union type for Loan, Modification, Settlement or User */
-export type TransactionSourceUnion = Account | Cgw | LoanLong | LoanModification | LoanRegular | Payment | Settlement | User | WalletCrypto;
+export type TransactionSourceUnion = Account | Cgw | LoanLong | LoanModification | LoanRegular | Payment | Settlement | Transaction | User | WalletCrypto;
 
 export enum TransactionStatus {
   /** authorized */
@@ -7085,6 +7540,8 @@ export enum TransactionStatus {
 export enum TransactionWalletType {
   /** fiat_wallet */
   FiatWallet = 'fiat_wallet',
+  /** settlement_wallet */
+  SettlementWallet = 'settlement_wallet',
   /** spc_wallet */
   SpcWallet = 'spc_wallet'
 }
@@ -7119,11 +7576,15 @@ export type User = BaseModelInterface & Node & {
   currentLimit?: Maybe<Scalars['Float']['output']>;
   currentSignInAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   currentSignInIp?: Maybe<Scalars['String']['output']>;
+  dailyCurrentLimit?: Maybe<Scalars['Float']['output']>;
+  dailyLimit?: Maybe<Scalars['Float']['output']>;
+  dailyUsedLimit?: Maybe<Scalars['Float']['output']>;
   /** Returns list of dan citizen salaries */
   danCitizenSalaryInfos: DanCitizenSalaryConnection;
   /** Returns list of devices */
   devices?: Maybe<UserDeviceConnection>;
   email?: Maybe<Scalars['String']['output']>;
+  faceCompare?: Maybe<Scalars['Boolean']['output']>;
   faceIdToken?: Maybe<Scalars['String']['output']>;
   failedAttempts?: Maybe<Scalars['Int']['output']>;
   failedPinAttempts?: Maybe<Scalars['Int']['output']>;
@@ -7133,9 +7594,6 @@ export type User = BaseModelInterface & Node & {
   firstName?: Maybe<Scalars['String']['output']>;
   fullName?: Maybe<Scalars['String']['output']>;
   gender?: Maybe<Gender>;
-  groceryCurrentLimit?: Maybe<Scalars['Float']['output']>;
-  groceryLimit?: Maybe<Scalars['Float']['output']>;
-  groceryUsedLimit?: Maybe<Scalars['Float']['output']>;
   /** ID of the object. */
   id: Scalars['ID']['output'];
   /** Returns list of invoices */
@@ -7168,9 +7626,11 @@ export type User = BaseModelInterface & Node & {
   references?: Maybe<AttachmentConnection>;
   region: Region;
   regionId?: Maybe<Scalars['ID']['output']>;
+  rekognitionAttempt?: Maybe<Scalars['Float']['output']>;
   rekognitionFlow?: Maybe<Scalars['String']['output']>;
   rememberCreatedAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
   resetPass?: Maybe<Scalars['Boolean']['output']>;
+  riskScore?: Maybe<Scalars['Float']['output']>;
   shortName?: Maybe<Scalars['String']['output']>;
   signInCount?: Maybe<Scalars['Int']['output']>;
   spcBaseLimit?: Maybe<Scalars['Float']['output']>;
@@ -7188,6 +7648,7 @@ export type User = BaseModelInterface & Node & {
   userEmails: Array<UserEmail>;
   userPhones: Array<UserPhone>;
   username?: Maybe<Scalars['String']['output']>;
+  virtualAccounts?: Maybe<Array<VirtualAccount>>;
   /** Returns list of transactions */
   walletTransactions: TransactionConnection;
   xacCreditScore?: Maybe<XacCreditScore>;
@@ -7276,6 +7737,12 @@ export type UserInvoicesArgs = {
   last?: InputMaybe<Scalars['Int']['input']>;
   offset?: InputMaybe<Scalars['Int']['input']>;
   sort?: InputMaybe<SortFilter>;
+};
+
+
+/** Representation of a StorePay user. */
+export type UserKycArgs = {
+  state?: InputMaybe<Scalars['String']['input']>;
 };
 
 
@@ -7466,6 +7933,7 @@ export type UserDevice = BaseModelInterface & Node & {
   ip?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
   updatedAt: Scalars['ISO8601DateTime']['output'];
+  user?: Maybe<User>;
   userId?: Maybe<Scalars['ID']['output']>;
 };
 
@@ -7582,6 +8050,7 @@ export type UserFilter = {
   loyaltyCategoryId?: InputMaybe<IdFilter>;
   phone?: InputMaybe<StringFilter>;
   resetPass?: InputMaybe<BoolFilter>;
+  riskScore?: InputMaybe<IntFilter>;
   state?: InputMaybe<EnumStringFilter>;
   status?: InputMaybe<EnumStringFilter>;
   updatedAt?: InputMaybe<DateFilter>;
@@ -7821,6 +8290,39 @@ export enum VerificationStatus {
   Verified = 'verified'
 }
 
+export type VirtualAccount = BaseModelInterface & Node & {
+  __typename?: 'VirtualAccount';
+  accountNumber?: Maybe<Scalars['String']['output']>;
+  accountType?: Maybe<VirtualAccountPayment>;
+  activationDate?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  createdAt: Scalars['ISO8601DateTime']['output'];
+  /** ID of the object. */
+  id: Scalars['ID']['output'];
+  loanId: Scalars['ID']['output'];
+  originalAmount?: Maybe<Scalars['Float']['output']>;
+  outstandingAmount?: Maybe<Scalars['Float']['output']>;
+  status?: Maybe<VirtualAccountStatus>;
+  updatedAt: Scalars['ISO8601DateTime']['output'];
+  user: User;
+  userId: Scalars['ID']['output'];
+};
+
+export enum VirtualAccountPayment {
+  /** down_payment */
+  DownPayment = 'down_payment',
+  /** repayment */
+  Repayment = 'repayment'
+}
+
+export enum VirtualAccountStatus {
+  /** cancelled */
+  Cancelled = 'cancelled',
+  /** paid */
+  Paid = 'paid',
+  /** pending */
+  Pending = 'pending'
+}
+
 export type WalletCrypto = BaseModelInterface & Node & WalletInterface & {
   __typename?: 'WalletCrypto';
   account?: Maybe<Scalars['String']['output']>;
@@ -7931,6 +8433,40 @@ export type WalletInterface = {
 
 /** An object with an ID. */
 export type WalletInterfaceTransactionsArgs = {
+  after?: InputMaybe<Scalars['String']['input']>;
+  before?: InputMaybe<Scalars['String']['input']>;
+  filter?: InputMaybe<WalletTransactionFilter>;
+  first?: InputMaybe<Scalars['Int']['input']>;
+  last?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+  sort?: InputMaybe<SortFilter>;
+};
+
+export type WalletSettlement = BaseModelInterface & Node & WalletInterface & {
+  __typename?: 'WalletSettlement';
+  account?: Maybe<Scalars['String']['output']>;
+  availableAmount?: Maybe<Scalars['Float']['output']>;
+  balance?: Maybe<Scalars['Float']['output']>;
+  createdAt: Scalars['ISO8601DateTime']['output'];
+  currency?: Maybe<Scalars['String']['output']>;
+  expiresAt?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  freezeAmount?: Maybe<Scalars['Float']['output']>;
+  /** ID of the object. */
+  id: Scalars['ID']['output'];
+  lockedAmount?: Maybe<Scalars['Float']['output']>;
+  name?: Maybe<Scalars['String']['output']>;
+  owner?: Maybe<Node>;
+  preferences?: Maybe<Scalars['JSON']['output']>;
+  startsDate?: Maybe<Scalars['ISO8601DateTime']['output']>;
+  status?: Maybe<WalletStatus>;
+  /** Returns list of transactions */
+  transactions: TransactionConnection;
+  type?: Maybe<Scalars['String']['output']>;
+  updatedAt: Scalars['ISO8601DateTime']['output'];
+};
+
+
+export type WalletSettlementTransactionsArgs = {
   after?: InputMaybe<Scalars['String']['input']>;
   before?: InputMaybe<Scalars['String']['input']>;
   filter?: InputMaybe<WalletTransactionFilter>;
@@ -8363,6 +8899,7 @@ export type KycRecreateForMongoliaInput = {
 
 /** Autogenerated input type of kycUpdateForIndonesia */
 export type KycUpdateForIndonesiaInput = {
+  bloodType?: InputMaybe<Scalars['String']['input']>;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   companyAddress?: InputMaybe<Scalars['String']['input']>;
@@ -8375,10 +8912,14 @@ export type KycUpdateForIndonesiaInput = {
   id: Scalars['ID']['input'];
   industry?: InputMaybe<Scalars['String']['input']>;
   maritalStatus?: InputMaybe<MaritalStatus>;
+  nationality?: InputMaybe<Scalars['String']['input']>;
   numberOfChildren?: InputMaybe<NumberOfChildren>;
+  passportAddress?: InputMaybe<Scalars['String']['input']>;
+  placeOfBirth?: InputMaybe<Scalars['String']['input']>;
   position?: InputMaybe<Scalars['String']['input']>;
   preferences?: InputMaybe<Scalars['JSON']['input']>;
   residentOwnerStatus?: InputMaybe<ResidentOwnerStatus>;
+  rtRw?: InputMaybe<Scalars['String']['input']>;
   salaryIncome?: InputMaybe<Scalars['Float']['input']>;
   startingPeriod?: InputMaybe<StartingPeriod>;
 };
@@ -8399,12 +8940,21 @@ export type KycUpdateForMongoliaInput = {
   emergencyContactPhoneTwo?: InputMaybe<Scalars['String']['input']>;
   emergencyContactSurname?: InputMaybe<Scalars['String']['input']>;
   emergencyContactSurnameTwo?: InputMaybe<Scalars['String']['input']>;
+  emergencyContacts?: InputMaybe<Scalars['JSON']['input']>;
+  emergencyRelation?: InputMaybe<EmergencyRelation>;
+  familyIncome?: InputMaybe<FamilyIncome>;
   id: Scalars['ID']['input'];
+  incomeEarners?: InputMaybe<IncomeEarners>;
   industry?: InputMaybe<Scalars['String']['input']>;
   ktp?: InputMaybe<Scalars['Upload']['input']>;
   maritalStatus?: InputMaybe<MaritalStatus>;
+  newMaritalStatus?: InputMaybe<NewMaritalStatus>;
   numberOfChildren?: InputMaybe<NumberOfChildren>;
   passportImage?: InputMaybe<Scalars['Upload']['input']>;
+  pepOrg?: InputMaybe<Scalars['String']['input']>;
+  pepPosition?: InputMaybe<Scalars['String']['input']>;
+  pepRelation?: InputMaybe<PepRelationMongolia>;
+  pepStatus?: InputMaybe<PepStatus>;
   position?: InputMaybe<Scalars['String']['input']>;
   preferences?: InputMaybe<Scalars['JSON']['input']>;
   residentOwnerStatus?: InputMaybe<ResidentOwnerStatus>;
@@ -8618,6 +9168,16 @@ export type PaymentPaymentCreateInput = {
   targetId: Scalars['ID']['input'];
 };
 
+/** Autogenerated input type of registerFcmToken */
+export type RegisterFcmTokenInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  deviceModel: Scalars['String']['input'];
+  deviceOs: Scalars['String']['input'];
+  subscribed: Scalars['Boolean']['input'];
+  subscriptionId: Scalars['String']['input'];
+};
+
 /** Autogenerated input type of registerSubId */
 export type RegisterSubIdInput = {
   /** A unique identifier for the client performing the mutation. */
@@ -8626,6 +9186,13 @@ export type RegisterSubIdInput = {
   deviceOs: Scalars['String']['input'];
   subscribed: Scalars['Boolean']['input'];
   subscriptionId: Scalars['String']['input'];
+};
+
+/** Autogenerated input type of resendTransactionOtpForBss */
+export type ResendTransactionOtpForBssInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
 };
 
 /** Autogenerated input type of sendOtpByEmailForIndonesia */
@@ -8679,6 +9246,14 @@ export type UserChangeStateInput = {
   userId: Scalars['ID']['input'];
 };
 
+/** Autogenerated input type of userCheckOtpForRiskyAction */
+export type UserCheckOtpForRiskyActionInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
+  otp: Scalars['String']['input'];
+};
+
 /** Autogenerated input type of userCreate */
 export type UserCreateInput = {
   /** A unique identifier for the client performing the mutation. */
@@ -8721,6 +9296,13 @@ export type UserDisableInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   email: Scalars['String']['input'];
+};
+
+/** Autogenerated input type of userFaceCompareForRiskyAction */
+export type UserFaceCompareForRiskyActionInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  sessionId: Scalars['String']['input'];
 };
 
 /** Autogenerated input type of userFindByPhone */
@@ -8787,11 +9369,24 @@ export type UserReCreateStatementsInput = {
   userId?: InputMaybe<Scalars['ID']['input']>;
 };
 
+/** Autogenerated input type of userReadyForRekognition */
+export type UserReadyForRekognitionInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+};
+
 /** Autogenerated input type of userRequestCreditScore */
 export type UserRequestCreditScoreInput = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: InputMaybe<Scalars['String']['input']>;
   userId?: InputMaybe<Scalars['ID']['input']>;
+};
+
+/** Autogenerated input type of userRiskyAction */
+export type UserRiskyActionInput = {
+  actionName: RiskyAction;
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
 };
 
 /** Autogenerated input type of validateOtpEmailForIndonesia */
@@ -8811,6 +9406,14 @@ export type ValidateOtpForIndonesiaInput = {
   token: Scalars['String']['input'];
 };
 
+/** Autogenerated input type of validateTransactionOtpForBss */
+export type ValidateTransactionOtpForBssInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
+  otp: Scalars['String']['input'];
+};
+
 /** Autogenerated input type of verificationRespond */
 export type VerificationRespondInput = {
   /** A unique identifier for the client performing the mutation. */
@@ -8818,6 +9421,13 @@ export type VerificationRespondInput = {
   id: Scalars['ID']['input'];
   respond: VerificationStatus;
   respondReason?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** Autogenerated input type of virtualAccountDestroy */
+export type VirtualAccountDestroyInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: InputMaybe<Scalars['String']['input']>;
+  id: Scalars['ID']['input'];
 };
 
 /** Autogenerated input type of walletCryptoTransactionCreate */

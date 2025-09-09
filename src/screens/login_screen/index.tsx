@@ -8,7 +8,8 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const handleSubmit = async () => {
     try {
-      await login(username, password);
+   const res =   await login(username, password);
+   console.log(JSON.stringify(res), 'RESS')
     } catch (e) {
       console.log('Нэвтрэхэд алдаа:', e);
     }
@@ -27,7 +28,7 @@ export default function LoginScreen() {
       <Text>Утасны дугаар:</Text>
       <TextInput
         keyboardType="numeric"
-        style={{ borderWidth: 1, borderColor: '#DDDDDD', borderRadius: 10, paddingHorizontal: 16 }}
+        style={{ borderWidth: 1, borderColor: '#DDDDDD', borderRadius: 10, paddingHorizontal: 16, height:50 }}
         onChangeText={setUsername}
         value={username}
       />
@@ -37,6 +38,7 @@ export default function LoginScreen() {
           borderWidth: 1,
           borderColor: '#DDDDDD',
           borderRadius: 10,
+          height: 50,
           marginBottom: 10,
           paddingHorizontal: 16,
           color: '#222222',
@@ -49,13 +51,13 @@ export default function LoginScreen() {
         style={{
           height: 50,
           width: '100%',
-          backgroundColor: 'coral',
+          backgroundColor: 'blue',
           justifyContent: 'center',
           alignItems: 'center',
           borderRadius: 10,
         }}
       >
-        <Text>Нэвтрэх</Text>
+        <Text style={{color: '#fff', fontWeight: 'bold'}}>Нэвтрэх</Text>
       </TouchableOpacity>
       {isAuthenticated && <Text>⚡ Та нэвтэрсэн байна</Text>}
     </View>
